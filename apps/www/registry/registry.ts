@@ -367,19 +367,19 @@ const example: Registry = [
     name: "breadcrumb-ellipsis",
     type: "components:example",
     registryDependencies: ["breadcrumb"],
-    files: ["example/breadcrumb-ellipsis.tsx"],
-  },
-  {
-    name: "breadcrumb-link",
-    type: "components:example",
-    registryDependencies: ["breadcrumb"],
-    files: ["example/breadcrumb-link.tsx"],
+    files: ["example/breadcrumb-ellipsis"],
   },
   {
     name: "breadcrumb-responsive",
     type: "components:example",
     registryDependencies: ["breadcrumb"],
-    files: ["example/breadcrumb-responsive.tsx"],
+    files: ["example/breadcrumb-responsive"],
+  },
+  {
+    name: "breadcrumb-link",
+    type: "components:example",
+    registryDependencies: ["breadcrumb"],
+    files: ["example/breadcrumb-link"],
   },
   {
     name: "button-demo",
