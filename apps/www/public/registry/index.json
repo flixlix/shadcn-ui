@@ -300,6 +300,16 @@
     "type": "components:ui"
   },
   {
+    "name": "rating",
+    "dependencies": [
+      "@radix-ui/react-radio-group"
+    ],
+    "files": [
+      "ui/rating.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
     "name": "resizable",
     "dependencies": [
       "react-resizable-panels"
@@ -412,6 +422,13 @@
     "type": "components:ui"
   },
   {
+    "name": "timeline",
+    "files": [
+      "ui/timeline.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
     "name": "toast",
     "dependencies": [
       "@radix-ui/react-toast"
@@ -420,6 +437,13 @@
       "ui/toast.tsx",
       "ui/use-toast.ts",
       "ui/toaster.tsx"
+    ],
+    "type": "components:ui"
+  },
+  {
+    "name": "toc",
+    "files": [
+      "ui/toc.tsx"
     ],
     "type": "components:ui"
   },

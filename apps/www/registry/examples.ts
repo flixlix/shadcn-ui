@@ -504,6 +504,42 @@ export const examples: Registry = [
     files: ["example/radio-group-form.tsx"],
   },
   {
+    name: "rating-demo",
+    type: "components:example",
+    registryDependencies: ["rating"],
+    files: ["example/rating-demo.tsx"],
+  },
+  {
+    name: "rating-count",
+    type: "components:example",
+    registryDependencies: ["rating"],
+    files: ["example/rating-count.tsx"],
+  },
+  {
+    name: "rating-custom-icon",
+    type: "components:example",
+    registryDependencies: ["rating"],
+    files: ["example/rating-custom-icon.tsx"],
+  },
+  {
+    name: "rating-custom-label",
+    type: "components:example",
+    registryDependencies: ["rating"],
+    files: ["example/rating-custom-label.tsx"],
+  },
+  {
+    name: "rating-disabled",
+    type: "components:example",
+    registryDependencies: ["rating"],
+    files: ["example/rating-disabled.tsx"],
+  },
+  {
+    name: "rating-readonly",
+    type: "components:example",
+    registryDependencies: ["rating"],
+    files: ["example/rating-readonly.tsx"],
+  },
+  {
     name: "resizable-demo",
     type: "components:example",
     registryDependencies: ["resizable"],
@@ -660,6 +696,30 @@ export const examples: Registry = [
     files: ["example/textarea-with-text.tsx"],
   },
   {
+    name: "timeline-demo",
+    type: "components:example",
+    registryDependencies: ["timeline"],
+    files: ["example/timeline-demo.tsx"],
+  },
+  {
+    name: "timeline-right",
+    type: "components:example",
+    registryDependencies: ["timeline"],
+    files: ["example/timeline-right.tsx"],
+  },
+  {
+    name: "timeline-alternate",
+    type: "components:example",
+    registryDependencies: ["timeline"],
+    files: ["example/timeline-alternate.tsx"],
+  },
+  {
+    name: "timeline-labels",
+    type: "components:example",
+    registryDependencies: ["timeline"],
+    files: ["example/timeline-labels.tsx"],
+  },
+  {
     name: "toast-demo",
     type: "components:example",
     registryDependencies: ["toast"],
@@ -688,6 +748,24 @@ export const examples: Registry = [
     type: "components:example",
     registryDependencies: ["toast"],
     files: ["example/toast-with-title.tsx"],
+  },
+  {
+    name: "toc-demo",
+    type: "components:example",
+    registryDependencies: ["toc"],
+    files: ["example/toc-demo.tsx"],
+  },
+  {
+    name: "toc-nested",
+    type: "components:example",
+    registryDependencies: ["toc"],
+    files: ["example/toc-nested.tsx"],
+  },
+  {
+    name: "toc-active",
+    type: "components:example",
+    registryDependencies: ["toc"],
+    files: ["example/toc-active.tsx"],
   },
   {
     name: "toggle-group-demo",

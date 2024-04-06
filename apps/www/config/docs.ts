@@ -1,4 +1,4 @@
-import { MainNavItem, SidebarNavItem } from "types/nav"
+import type { MainNavItem, SidebarNavItem } from "types/nav"
 
 interface DocsConfig {
   mainNav: MainNavItem[]
@@ -13,7 +13,7 @@ export const docsConfig: DocsConfig = {
     },
     {
       title: "Components",
-      href: "/docs/components/accordion",
+      href: "/docs/components",
     },
     {
       title: "Themes",
@@ -81,6 +81,7 @@ export const docsConfig: DocsConfig = {
     },
     {
       title: "Components",
+      href: "/docs/components",
       items: [
         {
           title: "Accordion",
@@ -245,6 +246,12 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "Rating",
+          href: "/docs/components/rating",
+          items: [],
+          label: "New",
+        },
+        {
           title: "Resizable",
           href: "/docs/components/resizable",
           items: [],
@@ -305,9 +312,21 @@ export const docsConfig: DocsConfig = {
           items: [],
         },
         {
+          title: "Timeline",
+          href: "/docs/components/timeline",
+          items: [],
+          label: "New",
+        },
+        {
           title: "Toast",
           href: "/docs/components/toast",
           items: [],
+        },
+        {
+          title: "TOC",
+          href: "/docs/components/toc",
+          items: [],
+          label: "New",
         },
         {
           title: "Toggle",

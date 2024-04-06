@@ -183,6 +183,12 @@ export const ui: Registry = [
     files: ["ui/radio-group.tsx"],
   },
   {
+    name: "rating",
+    type: "components:ui",
+    dependencies: ["@radix-ui/react-radio-group"],
+    files: ["ui/rating.tsx"],
+  },
+  {
     name: "resizable",
     type: "components:ui",
     dependencies: ["react-resizable-panels"],
@@ -252,10 +258,20 @@ export const ui: Registry = [
     files: ["ui/textarea.tsx"],
   },
   {
+    name: "timeline",
+    type: "components:ui",
+    files: ["ui/timeline.tsx"],
+  },
+  {
     name: "toast",
     type: "components:ui",
     dependencies: ["@radix-ui/react-toast"],
     files: ["ui/toast.tsx", "ui/use-toast.ts", "ui/toaster.tsx"],
+  },
+  {
+    name: "toc",
+    type: "components:ui",
+    files: ["ui/toc.tsx"],
   },
   {
     name: "toggle",
