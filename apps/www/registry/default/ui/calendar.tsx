@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { differenceInCalendarDays } from "date-fns"
+import { differenceInCalendarDays, format } from "date-fns"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import {
   DayPicker,
@@ -13,6 +13,8 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/registry/default/ui/button"
+
+export type CalendarViews = "days" | "years" | "months"
 
 export type CalendarProps = DayPickerProps & {
   /**
@@ -58,7 +60,13 @@ function Calendar({
   numberOfMonths,
   ...props
 }: CalendarProps) {
-  const [navView, setNavView] = React.useState<"days" | "years">("days")
+  const [selectedYear, setSelectedYear] = React.useState<number>(
+    (props.defaultMonth ?? new Date()).getFullYear()
+  )
+  const [selectedMonth, setSelectedMonth] = React.useState<number>(
+    (props.defaultMonth ?? new Date()).getMonth()
+  )
+  const [navView, setNavView] = React.useState<CalendarViews>("days")
   const [displayYears, setDisplayYears] = React.useState<{
     from: number
     to: number
@@ -114,7 +122,7 @@ function Calendar({
   const _monthGridClassName = cn("mx-auto mt-4", props.monthGridClassName)
   const _weekClassName = cn("mt-2 flex w-max items-start", props.weekClassName)
   const _dayClassName = cn(
-    "size-8 flex flex-1 items-center justify-center p-0 text-sm",
+    "flex size-8 flex-1 items-center justify-center p-0 text-sm",
     props.dayClassName
   )
   const _dayButtonClassName = cn(
@@ -210,6 +218,7 @@ function Calendar({
                   ) > 0)
               )
             }
+            if (navView === "months") return true
             return !previousMonth
           })()
 
@@ -228,6 +237,7 @@ function Calendar({
                   ) > 0)
               )
             }
+            if (navView === "months") return true
             return !nextMonth
           })()
 
@@ -310,27 +320,47 @@ function Calendar({
             </nav>
           )
         },
-        CaptionLabel: ({ children }) => (
-          <Button
-            className="h-7 w-full truncate text-sm font-medium"
-            variant="ghost"
-            size="sm"
-            onClick={() =>
-              setNavView((prev) => (prev === "days" ? "years" : "days"))
-            }
-          >
-            {navView === "days"
-              ? children
-              : displayYears.from + " - " + displayYears.to}
-          </Button>
-        ),
-        MonthGrid: ({ className, children, ...props }) => {
+        CaptionLabel: ({ children }) => {
+          function handleMonthClick() {
+            setNavView((prev) =>
+              prev === "days" ? "months" : prev === "years" ? "months" : "days"
+            )
+          }
+          function handleYearClick() {
+            setNavView((prev) =>
+              prev === "days" ? "years" : prev === "months" ? "years" : "days"
+            )
+          }
+          return (
+            <div className="flex items-center gap-2">
+              <Button
+                className="h-7 w-full text-sm font-medium"
+                variant="ghost"
+                size="sm"
+                onClick={handleMonthClick}
+              >
+                {children?.toString().split(" ")[0]}
+              </Button>
+              <Button
+                className="h-7 w-full text-sm font-medium"
+                variant="ghost"
+                size="sm"
+                onClick={handleYearClick}
+              >
+                {children?.toString().split(" ")[1]}
+              </Button>
+            </div>
+          )
+        },
+        MonthGrid: ({ className, children, ...monthGridProps }) => {
           const { goToMonth } = useDayPicker()
+
+          //Years grid
           if (navView === "years") {
             return (
               <div
                 className={cn("grid grid-cols-4 gap-y-2", className)}
-                {...props}
+                {...monthGridProps}
               >
                 {Array.from(
                   { length: displayYears.to - displayYears.from + 1 },
@@ -358,11 +388,12 @@ function Calendar({
                         )}
                         variant="ghost"
                         onClick={() => {
-                          setNavView("days")
+                          setNavView(selectedMonth ? "days" : "months")
+                          setSelectedYear(displayYears.from + i)
                           goToMonth(
                             new Date(
                               displayYears.from + i,
-                              new Date().getMonth()
+                              selectedMonth ?? new Date().getMonth()
                             )
                           )
                         }}
@@ -376,8 +407,58 @@ function Calendar({
               </div>
             )
           }
+          // Months Grid
+          else if (navView === "months") {
+            return (
+              <div
+                className={cn("grid grid-cols-4 gap-y-2", className)}
+                {...monthGridProps}
+              >
+                {Array.from({ length: 12 }, (_, i) => {
+                  const isBefore =
+                    selectedYear !== undefined &&
+                    differenceInCalendarDays(
+                      new Date(selectedYear, i, 31),
+                      startMonth!
+                    ) < 0
+
+                  const isAfter =
+                    selectedYear !== undefined &&
+                    differenceInCalendarDays(
+                      new Date(selectedYear, i, 0),
+                      endMonth!
+                    ) > 0
+
+                  const isDisabled = isBefore || isAfter
+                  return (
+                    <Button
+                      key={i}
+                      className={cn(
+                        "h-7 w-full text-sm font-normal text-foreground",
+                        i === new Date().getMonth() &&
+                          "bg-accent font-medium text-accent-foreground"
+                      )}
+                      variant="ghost"
+                      onClick={() => {
+                        setSelectedMonth(i)
+                        setNavView("days")
+                        goToMonth(
+                          new Date(selectedYear ?? new Date().getFullYear(), i)
+                        )
+                      }}
+                      disabled={navView === "months" ? isDisabled : undefined}
+                    >
+                      {format(new Date(new Date().getFullYear(), i, 1), "MMM")}
+                    </Button>
+                  )
+                })}
+              </div>
+            )
+          }
+
+          // Days grid
           return (
-            <table className={className} {...props}>
+            <table className={className} {...monthGridProps}>
               {children}
             </table>
           )
